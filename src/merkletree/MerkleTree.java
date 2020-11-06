@@ -248,7 +248,7 @@ public class MerkleTree
 			return candidates;
 		}
 		
-		List<String> candidatesLeft = nodoLigero(root.leftTree, trx);
+		List<String> candidatesLeft = nodoLigero(root.rightTree, trx);
 		List<String> candidatesRight = nodoLigero(root.leftTree, trx);
 		
 		if(candidatesLeft != null) {
@@ -261,29 +261,6 @@ public class MerkleTree
 		}
 		
 		return null;
-		
-		
-		/*
-			if(root.rightLeaf == null && root.leftLeaf == null) {
-				nodoLigero(root.leftTree, trx, false, candidates);
-				nodoLigero(root.rightTree, trx, false, candidates);
-				candidates.add(toHexString(root.digest));
-			}else {
-				candidates.add(toHexString(root.digest));
-				if(root.rightLeaf == trx) {
-					System.out.println("te encontre right");
-				}else if(root.leftLeaf == trx) {
-					System.out.println("te encontre left");
-					
-				
-					return candidates;
-				
-				}else {
-					candidates = null;
-					return candidates;
-				}
-			}
-			return candidates;*/
 		
 	}
 
