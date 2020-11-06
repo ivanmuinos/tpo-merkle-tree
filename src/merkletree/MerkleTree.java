@@ -2,6 +2,7 @@ package merkletree;
 
 import java.awt.HeadlessException;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -233,30 +234,57 @@ public class MerkleTree
 		prettyPrint(0);
 	}
 	
-	public List<String> nodoLigero(MerkleTree root, Leaf trx, boolean stop, List<String> candidates){
+	public List<String> nodoLigero(MerkleTree root, Leaf trx){
 		
+		if (root == null) return null;
 		
-		if(root.rightLeaf == null && root.leftLeaf == null) {
-			nodoLigero(root.leftTree, trx, false, candidates);
-			nodoLigero(root.rightTree, trx, false, candidates);
-		}else {
+		if (root.rightLeaf == trx) {
+			List<String> candidates = new ArrayList<String>();
 			candidates.add(toHexString(root.digest));
-			System.out.println("la ruta es: " + candidates);
-			//System.out.println(trx.toString());
-			//System.out.println(root.rightLeaf.toString());
-			//System.out.println(root.leftLeaf);
-			if(root.rightLeaf == trx) {
-				System.out.println("te encontre right");
-			}else if(root.leftLeaf == trx) {
-				System.out.println("te encontre left");
-				
-				return candidates;
-			}else {
-				candidates = null;
-			}
+			return candidates;
+		}else if(root.leftLeaf == trx){
+			List<String> candidates = new ArrayList<String>();
+			candidates.add(toHexString(root.digest));
+			return candidates;
 		}
+		
+		List<String> candidatesLeft = nodoLigero(root.leftTree, trx);
+		List<String> candidatesRight = nodoLigero(root.leftTree, trx);
+		
+		if(candidatesLeft != null) {
+			candidatesLeft.add(toHexString(root.digest));
+			return candidatesLeft;
+		}
+		if(candidatesRight != null) {
+			candidatesRight.add(toHexString(root.digest));
+			return candidatesRight;
+		}
+		
 		return null;
-	
+		
+		
+		/*
+			if(root.rightLeaf == null && root.leftLeaf == null) {
+				nodoLigero(root.leftTree, trx, false, candidates);
+				nodoLigero(root.rightTree, trx, false, candidates);
+				candidates.add(toHexString(root.digest));
+			}else {
+				candidates.add(toHexString(root.digest));
+				if(root.rightLeaf == trx) {
+					System.out.println("te encontre right");
+				}else if(root.leftLeaf == trx) {
+					System.out.println("te encontre left");
+					
+				
+					return candidates;
+				
+				}else {
+					candidates = null;
+					return candidates;
+				}
+			}
+			return candidates;*/
+		
 	}
 
 }

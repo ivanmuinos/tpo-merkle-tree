@@ -39,9 +39,9 @@ public class TreeBuilder
 		final byte[] block2 = {(byte) 0xae, (byte) 0x45, (byte) 0x98, (byte) 0xff};
 		final byte[] block3 = {(byte) 0x5f, (byte) 0xd3, (byte) 0xcc, (byte) 0xe1};
 		final byte[] block4 = {(byte) 0xcb, (byte) 0xbc, (byte) 0xc4, (byte) 0xe2};
-		final byte[] block5 = {(byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x04};
+		final byte[] block5 = {(byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x06};
 		final byte[] block6 = {(byte) 0xae, (byte) 0x45, (byte) 0x98, (byte) 0xff};
-		final byte[] block7 = {(byte) 0x5f, (byte) 0xd3, (byte) 0xcc, (byte) 0xe1};
+		final byte[] block7 = {(byte) 0x5f, (byte) 0xd3, (byte) 0xcc, (byte) 0xe5};
 		final byte[] block8 = {(byte) 0xcb, (byte) 0xbc, (byte) 0xc4, (byte) 0xe2};
 
 		// Create leaf nodes containing these blocks
@@ -74,8 +74,15 @@ public class TreeBuilder
 		List<String> candidates = new ArrayList<String>();
 		
 		// Return the digest for the entire tree
-		//merkleTree.prettyPrint();
-		merkleTree.nodoLigero(merkleTree, leaf1, false, candidates);
+		merkleTree.prettyPrint();
+		System.out.println("-----------------------------------------");
+		List<String> hola = merkleTree.nodoLigero(merkleTree, leaf1);
+		System.out.println("-----------------------------------------");
+		System.out.println("estoy buscando" + leaf1);
+		System.out.println("-----------------------------------------");
+		for(String asd:hola) {
+			System.out.println(asd);
+		}
 	}
 
 }
