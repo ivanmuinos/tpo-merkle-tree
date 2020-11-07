@@ -9,8 +9,8 @@ public class Main {
 		NodoFull nodoFull = new NodoFull(trxs);
 		nodoFull.print();
 		
-		String trx = "7";
-		String[] path = nodoFull.solicitudNodoLigero(trx);
+		String trx = "3";
+		String[] path = nodoFull.solicitudNodoLigero(new Trx(trx));
 		System.out.println("");
 		System.out.println("La ruta de la trx " + trx + " es:");
 		Arrays.stream(path).forEach(System.out::println);

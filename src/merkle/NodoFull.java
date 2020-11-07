@@ -5,16 +5,27 @@ import java.util.List;
 
 public class NodoFull {
 	public Nodo raiz;
-	public Nodo[] hojas;
+	public Trx[] trxs;
 
 	public NodoFull(String[] trxs) {
-		this.hojas = new Nodo[trxs.length];
+		this.trxs = new Trx[trxs.length];
 
 		for (int i = 0; i < trxs.length; i++) {
-			this.hojas[i] = new Nodo(trxs[i]);
+			this.trxs[i] = new Trx(trxs[i]);
 		}
 
-		setNodosPadre(this.hojas);
+		this.setNodosTrxs();
+	}
+	
+	private void setNodosTrxs() {
+		Nodo[] nodos = new Nodo[this.trxs.length];
+		
+		for (int i = 0; i < this.trxs.length; i++) {
+			nodos[i] = new Nodo(this.trxs[i]);
+			this.trxs[i].nodoPadre = nodos[i];
+		}
+
+		this.setNodosPadre(nodos);
 	}
 
 	private void setNodosPadre(Nodo[] nodos) {
@@ -35,28 +46,29 @@ public class NodoFull {
 		this.setNodosPadre(nodosPadres);
 	}
 
-	public String[] solicitudNodoLigero(String trx) {
-		for (int i = 0; i < hojas.length; i++) {
-			Nodo hoja = hojas[i];
-			if (hoja.datos.equals(trx))
-				return getTrxPath(hoja);
+	public String[] solicitudNodoLigero(Trx searchTrx) {
+		for (int i = 0; i < trxs.length; i++) {
+			Trx trx = trxs[i];
+			if (trx.equals(searchTrx))
+				return getTrxPath(trx);
 		}
 		return new String[0];
 	}
 
-	private String[] getTrxPath(Nodo hoja) {
+	private String[] getTrxPath(Trx trx) {
 		int i = 0;
 		String[] path = new String[(this.height()) + 1];
-		while(hoja != null) {
-			path[i++] = hoja.hashCodeStr();
-			hoja = hoja.nodoPadre;
+		Nodo nodo = trx.nodoPadre;
+		while(nodo != null) {
+			path[i++] = nodo.hashCodeStr();
+			nodo = nodo.nodoPadre;
 		}
 		
 		return path;
 	}
 	
 	private int height() {
-		return  (int)(Math.log(this.hojas.length) / Math.log(2));
+		return (int)(Math.log(this.trxs.length) / Math.log(2));
 	}
 
 	public void print() {
