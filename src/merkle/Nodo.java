@@ -1,6 +1,7 @@
 package merkle;
 
 public class Nodo {
+	public Nodo nodoPadre;
 	public Nodo nodoIzq;
 	public Nodo nodoDer;
 	public String datos;
@@ -9,16 +10,14 @@ public class Nodo {
 	}
 	
 	public Nodo(Nodo nodoIzq, Nodo nodoDer) {
-		this.agregarNodos(nodoIzq, nodoDer);
+		nodoIzq.nodoPadre = this;
+		nodoDer.nodoPadre = this;
+		this.nodoIzq = nodoIzq;
+		this.nodoDer = nodoDer;
 	}
 	
 	public Nodo(String datos) {
 		this.datos = datos;
-	}
-
-	public void agregarNodos(Nodo nodoIzq, Nodo nodoDer) {
-		this.nodoIzq = nodoIzq;
-		this.nodoDer = nodoDer;
 	}
 
 	@Override
