@@ -32,22 +32,22 @@ public class NodoFull {
 		this.setNodosPadre(nodosPadres);
 	}
 
-	void printLevelOrder() {
+	void print() {
 		int i;
 		for (i = 1; i <= hojas.length / 2; i++) {
-			printGivenLevel(raiz, i);
+			printNivel(raiz, i);
 			System.out.println();
 		}
 	}
 
-	void printGivenLevel(Nodo root, int level) {
-		if (root == null)
+	void printNivel(Nodo nodo, int nivel) {
+		if (nodo == null)
 			return;
-		if (level == 1)
-			System.out.print(root + " ");
-		else if (level > 1) {
-			printGivenLevel(root.nodoIzq, level - 1);
-			printGivenLevel(root.nodoDer, level - 1);
+		if (nivel == 1)
+			System.out.print(nodo + " ");
+		else if (nivel > 1) {
+			printNivel(nodo.nodoIzq, nivel - 1);
+			printNivel(nodo.nodoDer, nivel - 1);
 		}
 	}
 
