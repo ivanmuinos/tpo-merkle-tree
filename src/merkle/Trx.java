@@ -1,7 +1,6 @@
 package merkle;
 
 public class Trx {
-	public Nodo nodoPadre;
 	public String dato;
 
 	public Trx(String dato) {
