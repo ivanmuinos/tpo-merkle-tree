@@ -60,7 +60,7 @@ public class NodoFull {
 		String[] path = new String[(this.height()) + 1];
 		Nodo nodo = trx.nodoPadre;
 		while(nodo != null) {
-			path[i++] = nodo.hashCodeStr();
+			path[i++] = nodo.hash;
 			nodo = nodo.nodoPadre;
 		}
 		

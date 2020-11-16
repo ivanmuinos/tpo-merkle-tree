@@ -5,6 +5,7 @@ public class Nodo {
 	public Nodo nodoIzq;
 	public Nodo nodoDer;
 	public Trx trx;
+	public String hash;
 
 	public Nodo() {
 	}
@@ -14,19 +15,17 @@ public class Nodo {
 		nodoDer.nodoPadre = this;
 		this.nodoIzq = nodoIzq;
 		this.nodoDer = nodoDer;
+		this.hash = Integer.toString(this.hashCode());
 	}
 	
 	public Nodo(Trx trx) {
 		this.trx = trx;
-	}
-	
-	public String hashCodeStr() {
-		return Integer.toString(this.hashCode());
+		this.hash = Integer.toString(this.hashCode());
 	}
 
 	@Override
 	public String toString() {
-		return "[Nodo = " + hashCodeStr() + (trx != null ? ", trx = " + trx : "") + "]";
+		return "[Nodo = " + hash + (trx != null ? ", trx = " + trx : "") + "]";
 	}
 
 	@Override
