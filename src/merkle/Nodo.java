@@ -1,7 +1,6 @@
 package merkle;
 
 public class Nodo {
-	public Nodo nodoPadre;
 	public Nodo nodoIzq;
 	public Nodo nodoDer;
 	public Trx trx;
@@ -11,8 +10,6 @@ public class Nodo {
 	}
 	
 	public Nodo(Nodo nodoIzq, Nodo nodoDer) {
-		nodoIzq.nodoPadre = this;
-		nodoDer.nodoPadre = this;
 		this.nodoIzq = nodoIzq;
 		this.nodoDer = nodoDer;
 		this.hash = Integer.toString(this.hashCode());

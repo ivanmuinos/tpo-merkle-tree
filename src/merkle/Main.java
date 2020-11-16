@@ -1,6 +1,6 @@
 package merkle;
 
-import java.util.Arrays;
+import pila.PilaTDA;
 
 public class Main {
 	public static void main(String[] args) {
@@ -9,11 +9,12 @@ public class Main {
 		NodoFull nodoFull = new NodoFull(trxs);
 		nodoFull.print();
 		
-		String trx = "3";
-		String[] path = nodoFull.solicitudNodoLigero(new Trx(trx));
+		Trx trx = new Trx("6");
 		System.out.println("");
 		System.out.println("La ruta de la trx " + trx + " es:");
-		Arrays.stream(path).forEach(System.out::println);
+		
+		PilaTDA path = nodoFull.solicitudNodoLigero(trx);
+		System.out.println(path);
 	}
 
 	private static String[] setTrxs(int height) {
